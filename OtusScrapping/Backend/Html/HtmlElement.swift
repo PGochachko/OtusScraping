@@ -9,7 +9,7 @@
 import Foundation
 import SwiftSoup
 
-protocol HtmlElementProtocol {
+protocol HtmlElementProtocol: HtmlParserProtocol {
     func attr(key: String) -> String?
     func text() -> String?
     func innerHtml() -> String?
@@ -48,5 +48,17 @@ struct HtmlElement: HtmlElementProtocol {
         } catch {
             return nil
         }
+    }
+    
+    func findElementsBySelector(selector: String) -> Array<HtmlElementProtocol> {
+        do {
+            if let innerHtml = innerHtml() {
+                let parcer = try HtmlParcer(html: innerHtml)
+                return parcer.findElementsBySelector(selector: selector)
+            }
+        } catch let error {
+            print(error)
+        }
+        return Array()
     }
 }

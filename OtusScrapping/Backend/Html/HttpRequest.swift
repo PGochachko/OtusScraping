@@ -12,8 +12,8 @@ import Combine
 struct HttpRequest {
     let url: String
 
-    func request() -> Future<String, Error> {
-        return Future<String, Error> { promice in
+    func request() -> Future<Data, Error> {
+        return Future<Data, Error> { promice in
             guard let url = URL(string: self.url)
             else {
                 promice(.failure(HttpRequestError.invalidUrl))
@@ -25,8 +25,7 @@ struct HttpRequest {
                 if let error = error {
                     promice(.failure(error))
                 } else if let data = data {
-                    let result = String(decoding: data, as: UTF8.self)
-                    promice(.success(result))
+                    promice(.success(data))
                 }
             })
             

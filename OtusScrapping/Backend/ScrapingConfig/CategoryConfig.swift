@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct NavigatorConfig<T: Decodable>: Decodable {
+class CategoryConfig: Decodable {
     enum ContentType: String, Decodable {
-        case item, news
+        case resource, item, news
     }
     
-    let navTo: ElementFinderConfig
     let contentType: ContentType
-    let content: T
+    let element: String?
+    let content: ContentConfig
+    let navTitle: String?
 }

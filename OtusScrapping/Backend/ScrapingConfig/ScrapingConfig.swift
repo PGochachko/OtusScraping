@@ -9,7 +9,7 @@
 import Foundation
 
 struct ScrapingConfig: Decodable {
-    let resource: ResourceConfig
+    let category: CategoryConfig
 
     static func parce(json: String) throws -> ScrapingConfig {
         let jsonData = json.data(using: .utf8)!
