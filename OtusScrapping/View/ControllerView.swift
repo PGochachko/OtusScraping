@@ -17,7 +17,6 @@ final class ControllerViewModel: ObservableObject {
     @Published private (set) var isLoading: Bool = true
     private (set) var contents: Array<ContentItem> = Array()
     private (set) var pageContent: PageContent? = nil
-    private (set) var futureCategory: CategoryConfig? = nil
     
     @Published var contentType: CategoryConfig.ContentType = CategoryConfig.ContentType.item
     private var subscriptions = Set<AnyCancellable>()
@@ -42,10 +41,9 @@ final class ControllerViewModel: ObservableObject {
                     do {
                         let html = String(decoding: htmlData, as: UTF8.self)
                         let htmlParcer = try HtmlParcer(html: html)
-                        self.contents = htmlParcer.getContents(category: c)
+                        self.contents.append(contentsOf: htmlParcer.getContents(category: c))
                         self.pageContent = htmlParcer.getPageContent(category: c)
                         self.contentType = c.contentType
-                        self.futureCategory = c.content.category
                         self.isLoading = false
                         self.contentDidLoad = true
                     } catch let error {
@@ -75,15 +73,15 @@ struct ControllerView: View {
             } else {
                 if self.viewModel.contentType == CategoryConfig.ContentType.item {
                     List(self.viewModel.contents) { content in
-                        NavigationLink(destination: ControllerView(href: content.href,
-                                                               category: self.viewModel.futureCategory)) {
+                        NavigationLink(destination: ControllerView(href: (content.hrefDomain ?? "") + (content.href ?? ""),
+                                                                   category: content.category)) {
                             ResourceItemView(content: content)
                         }
                     }
                 } else if self.viewModel.contentType == CategoryConfig.ContentType.resource {
                     List(self.viewModel.contents) { content in
-                        NavigationLink(destination: ControllerView(href: content.href,
-                                                               category: self.viewModel.futureCategory)) {
+                        NavigationLink(destination: ControllerView(href: (content.hrefDomain ?? "") + (content.href ?? ""),
+                                                               category: content.category)) {
                             ResourceItemView(content: content)
                         }
                     }

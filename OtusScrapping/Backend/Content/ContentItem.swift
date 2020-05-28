@@ -18,5 +18,8 @@ struct ContentItem: Identifiable {
     var date: String? = nil
     var views: String? = nil
     var href: String? = nil
+    var hrefDomain: String? = nil
     var text: String? = nil
+    
+    var category: CategoryConfig? = nil
 }

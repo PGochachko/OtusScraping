@@ -18,6 +18,7 @@ struct HtmlParcer: HtmlParserProtocol {
  
     init(html: String) throws {
         self.doc = try SwiftSoup.parse(html)
+        print(html)
     }
     
     func findElementsClass(className: String) -> Array<HtmlElementProtocol> {
@@ -74,6 +75,10 @@ struct HtmlParcer: HtmlParserProtocol {
             content.imgUrl = parser.findElementsBySelector(selector: imgSelector).last?.attr(key: "src")
         }
 
+        if let imgSelector = category.content.imgDataSrc {
+            content.imgUrl = parser.findElementsBySelector(selector: imgSelector).last?.attr(key: "data-src")
+        }
+        
         content.imgDomain = category.content.imgDomain
         
         if let titleSelector = category.content.title {
@@ -91,9 +96,15 @@ struct HtmlParcer: HtmlParserProtocol {
         if let hrefSelector = category.content.href {
             content.href = parser.findElementsBySelector(selector: hrefSelector).last?.attr(key: "href")
         }
+        
+        content.hrefDomain = category.content.hrefDomain
+        
         if let textSelector = category.content.text {
             content.text = parser.findElementsBySelector(selector: textSelector).last?.text()
         }
+        
+        content.category = category.content.category
+        
         return content
     }
 }

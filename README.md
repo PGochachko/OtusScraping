@@ -7,3 +7,7 @@
 ## Внешние библиотеки
 
 Для реализации функционала приложения была использована библиотека SwiftSoup: https://github.com/scinfu/SwiftSoup
+
+## Пример работы
+![Demo1 Otus Scraping](demo/demo1.gif)
+![Demo2 Otus Scraping](demo/demo2s.gif)

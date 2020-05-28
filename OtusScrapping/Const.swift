@@ -21,7 +21,7 @@ let ranobelib: String = """
         "element": "div.updates__item",
         "navTitle": "strong.section__header-title",
         "content": {
-          "img": "img.updates__cover",
+          "imgDataSrc": "img.updates__cover",
           "imgDomain": "https://ranobelib.me",
           "title": "a.link-default",
           "date": "div.updates__date",
@@ -50,62 +50,43 @@ let ranobelib: String = """
 }
 """
 
-//let ranobelib: String = """
-//{
-//  "resource": {
-//    "img": {
-//      "findType": "selector",
-//      "findProperties": {
-//        "selector": "div.testclass"
-//      }
-//    },
-//    "title": {
-//      "findType": "selector",
-//      "findProperties": {
-//        "selector": "div.testclass"
-//      }
-//    },
-//    "navigator": {
-//      "navTo": {
-//        "findType": "selector",
-//        "findProperties": {
-//          "selector": "div.testclass"
-//        }
-//      },
-//      "contentType": "item",
-//      "content": {
-//        "img": {
-//          "findType": "selector",
-//          "findProperties": {
-//            "selector": ""
-//          }
-//        },
-//        "title": {
-//          "findType": "selector",
-//          "findProperties": {
-//            "selector": ""
-//          }
-//        },
-//        "description": {
-//          "findType": "selector",
-//          "findProperties": {
-//            "selector": ""
-//          }
-//        },
-//        "date": {
-//          "findType": "selector",
-//          "findProperties": {
-//            "selector": ""
-//          }
-//        },
-//        "views": {
-//          "findType": "selector",
-//          "findProperties": {
-//            "selector": ""
-//          }
-//        }
-//      }
-//    }
-//  }
-//}
-//"""
+let rianews = """
+{
+  "category": {
+    "contentType": "resource",
+    "content": {
+      "title": "title",
+      "href": "a.header__sticked-link-ria",
+      "category": {
+        "contentType": "item",
+        "element": "div.cell-extension__item",
+        "content": {
+          "title": "span.cell-extension__item-title span",
+          "href": "a.cell-extension__item-link",
+          "hrefDomain": "https://ria.ru",
+          "category": {
+            "contentType": "item",
+            "element": "div.list-item",
+            "navTitle": "a.tag-input__tag-text",
+            "content": {
+              "img": "img.m-list-img",
+              "title": "a.list-item__title",
+              "date": "div.list-item__date",
+              "views": "div.list-item__views-text",
+              "href": "a.list-item__title",
+              "category": {
+                "contentType": "news",
+                "navTitle": "h1.article__title",
+                "content": {
+                  "text": "div.article__body"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+"""
+

@@ -12,6 +12,7 @@ import Combine
 import Foundation
 
 class ImageLoader: ObservableObject {
+    @Published var loaded: Bool = false
     @Published var image: UIImage?
     
     private let url: String
@@ -27,10 +28,13 @@ class ImageLoader: ObservableObject {
 
     func load() {
         cancellable = HttpRequest(url: url).request()
-            .map {UIImage(data: $0)}
-            .replaceError(with: nil)
             .receive(on: DispatchQueue.main)
-            .assign(to: \.image, on: self)
+            .sink(receiveCompletion: { result in
+                print(result)
+                self.loaded = true
+            }, receiveValue: { data in
+                self.image = UIImage(data: data)
+            })
     }
     
     func cancel() {
@@ -55,9 +59,13 @@ struct AsyncImage<Placeholder: View>: View {
     
     private var image: some View {
         Group {
-            if loader.image != nil {
-                Image(uiImage: loader.image!)
-                    .resizable()
+            if loader.loaded == true {
+                if loader.image != nil {
+                    Image(uiImage: loader.image!)
+                        .resizable()
+                } else {
+                    
+                }
             } else {
                 placeholder
             }

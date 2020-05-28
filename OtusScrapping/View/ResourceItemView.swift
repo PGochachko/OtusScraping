@@ -26,14 +26,16 @@ struct ResourceItemView: View {
                 Text(self.content.description ?? "")
                     .font(.subheadline)
                     .lineLimit(3)
-                Spacer()
-                HStack {
-                    Text(self.content.date ?? "")
-                        .font(.subheadline)
+                if self.content.date != nil || self.content.views != nil {
                     Spacer()
-                    Text(self.content.views ?? "")
-                        .font(.subheadline)
-                }
+                    HStack {
+                        Text(self.content.date ?? "")
+                            .font(.subheadline)
+                        Spacer()
+                        Text(self.content.views ?? "")
+                            .font(.subheadline)
+                    }
+                } else {}
              }
         }
     }
