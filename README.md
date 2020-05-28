@@ -10,4 +10,4 @@
 
 ## Пример работы
 ![Demo1 Otus Scraping](demo/demo1.gif)
-![Demo2 Otus Scraping](demo/demo2s.gif)
+![Demo2 Otus Scraping](demo/demo2.gif)
